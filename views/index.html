@@ -12,11 +12,13 @@
       100 followers
     </div>
     <div class="col-md-9">
-    
+    <ul style="list-style:none;">
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>{{tweet.content}}</li>
+        <li><h5>{{tweet.name}}</h5>
+            {{tweet.content}}</li>
       {% endfor %}
+      </ul>
       
     </div>
   </div>
