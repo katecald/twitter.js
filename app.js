@@ -2,9 +2,12 @@ const express = require('express');
 const volleyball = require('volleyball');
 const nunjucks = require('nunjucks');
 const routes = require("./routes");
+const bodyParser = require("body-parser");
 
 const twitterApp = express();
 
+twitterApp.use(bodyParser.urlencoded({ extended: false }))
+twitterApp.use(bodyParser.json())
 
 
 twitterApp.set('view engine', 'html'); // have res.render work with html files
@@ -19,10 +22,6 @@ twitterApp.use("/", routes);
 twitterApp.listen(3000, function() {
     console.log('server listening')
 }) 
-
-
-
-
 
 twitterApp.use(function(req, res, next) {
     console.log(req.method + ' / ' + res.statusCode)

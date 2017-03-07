@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 // could use one line instead: const router = require('express').Router();
 const tweetBank = require('../tweetBank');
-const bodyParser = require("body-parser");
+
 var path = require("path");
 
 router.get('/', function (req, res) {
@@ -10,19 +10,17 @@ router.get('/', function (req, res) {
   res.render( 'index', { tweets: tweets, showForm: true } );
 });
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-var jsonParser = bodyParser.json()
+
 
 router.post('/tweets', function (req, res) {
-  if (!req.body) return res.sendStatus(400)
-  add(req.body.name, req.body.text)
+  tweetBank.add(req.body.name, req.body.text)
   res.redirect('/')
 })
 
-router.post('/api/users', jsonParser, function (req, res) {
-  if (!req.body) return res.sendStatus(400)
-  // create user in req.body
-})
+// router.post('/api/users', jsonParser, function (req, res) {
+//   if (!req.body) return res.sendStatus(400)
+//   // create user in req.body
+// })
 
 router.get('/stylesheets/style.css', function (req, res) {
     res.sendFile("/stylesheets/style.css");
